@@ -1,0 +1,214 @@
+section {
+  height: 300px;
+  border: 1px solid #000;
+}
+.dd_with_chkb,
+.dd_with_select,
+.dd_with_hover {
+  width: 300px;
+}
+
+/* ---------------------------
+  Dropdown with CHECKBOX 
+  ---------------------------- */
+.dd_with_chkb label.toogle {
+  /* dropdown toogle */
+  display: block;
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: white;
+  color: #303030;
+  border: 1px solid #c2c2c2;
+}
+.dd_with_chkb label.toogle:hover {
+  cursor: pointer;
+}
+
+.dd_with_chkb input.chkb {
+  /* checkbox invisible*/
+  display: none;
+}
+.dd_with_chkb #chkb:checked ~ .dd_a {
+  display: block;
+  box-sizing: border-box;
+}
+
+.dd_with_chkb .dd_a {
+  /* dropdown item */
+  display: none;
+  padding: 15px;
+  border-left: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
+  color: #000;
+  font-size: 16px;
+  text-decoration: none;
+}
+.dd_with_chkb .dd_a:hover {
+  background-color: #f0f0f0;
+}
+.dd_with_chkb .dd_a:last-child {
+  border-bottom: 1px solid #c2c2c2;
+}
+
+/* ---------------------------
+  Dropdown with CSS HOVER 
+  ---------------------------- */
+.dd_with_hover div.toogle {
+  /* dropdown toogle */
+  display: block;
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: white;
+  color: #303030;
+  border: 1px solid #c2c2c2;
+}
+.dd_with_hover div.toogle:hover {
+  cursor: pointer;
+}
+.dd_with_hover div.toogle:hover > .dd_a {
+  display: block;
+  box-sizing: border-box;
+}
+/*.dd_with_hover div.toogle:hover {
+    padding-bottom: 0;
+  }*/
+.dd_with_hover .dd_a {
+  /* dropdown item */
+  display: none;
+  padding: 15px 0;
+  color: #000;
+  font-size: 16px;
+  text-decoration: none;
+}
+.dd_with_hover .dd_a:first-child {
+  margin-top: 15px;
+}
+.dd_with_hover .dd_a:hover {
+  background-color: #f0f0f0;
+}
+
+/* ---------------------------
+  Dropdown with HTML SELECT 
+  ---------------------------- */
+
+.MuiBox-root-192 {
+  padding: 2px !important;
+}
+.dd_with_select select {
+  width: 100%;
+  margin-top: 5px;
+  padding: 15px 0 15px 5px;
+}
+.dd_with_select select option {
+  /* dropdown item */
+  min-height: 50px;
+  padding: 15px;
+  border-left: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
+  color: #303030;
+  text-decoration: none;
+}
+.dd_with_select select option:hover {
+  background-color: #f0f0f0;
+}
+.custom-input {
+  margin-top: 1px;
+  height: 4px;
+  width: 100%;
+  padding: 15px 0 15px 5px;
+  opacity: 0.6;
+  color: #000;
+  font-family: Helvetica;
+  font-size: 15px;
+  line-height: 15px;
+  /* border: 1px solid red; */
+}
+datalist {
+  display: block !important;
+  border: 1px solid red;
+}
+.custom-textarea {
+  margin-top: 1px;
+  height: 114px;
+  width: 100%;
+  padding: 15px 0 15px 5px;
+  opacity: 0.6;
+  color: #000;
+  font-family: Helvetica;
+  font-size: 15px;
+  line-height: 15px;
+  /* border: 1px solid red; */
+}
+
+.dd_with_select label {
+  font-size: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 12px !important;
+}
+
+#myInput {
+  background-image: url("./searchicon.png");
+  background-color: #f0f0f0;
+  /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid rgb(255, 255, 255);
+  /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myUL {
+  /* Remove default list styling */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  /* border: 1px solid rgb(255, 255, 255);  */
+  /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+  /* background-color: #ffffff; */
+  /* Grey background color */
+  padding: 0px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 18px; /* Increase the font-size */
+  color: black; /* Add a black text color */
+  display: block; /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a:hover:not(.header) {
+  /* background-color: #eee; */
+  /* Add a hover effect to all links, except for headers */
+}
+.custom-select {
+  border: 1px solid rgb(219, 218, 218);
+}
+#myUL {
+  /* border: 1px solid red; */
+  height: 160px;
+  overflow-y: scroll;
+  /* border: 1px solid #ddd; */
+  /* opacity: 0.6; */
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
