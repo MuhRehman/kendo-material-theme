@@ -1,10 +1,10 @@
-import Reactt, { useState, useEffect } from 'react';
-
+import React, { useState} from 'react';
 import './App.css';
-import Tabsc from './Tabsc.js';
-import { withStyles, makeStyles,Box } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+
+import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
-import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
 import 'font-awesome/css/font-awesome.min.css';
@@ -15,15 +15,87 @@ import Container from '@material-ui/core/Container';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Tabs, TabPanel } from 'react-tabs';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+// import { withStyles } from '@material-ui/core/styles';
+// import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
+const currencies = [
+  {
+    value: 'USD',
+    label: 'Default',
+  },
+  {
+    value: 'EUR',
+    label: 'demo',
+  },
+  {
+    value: 'BTC',
+    label: 'demo',
+  },
+  {
+    value: 'JPY',
+    label: 'demo',
+  },
+];
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
 
 
-import SearchIcon from '@material-ui/icons/Search';
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
 
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
 const StyledTableCell = withStyles((theme) => ({
   head: {
     
@@ -56,24 +128,40 @@ const rows = [
  
 ];
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
+// const useStyles = makeStyles({
+//   table: {
+//     minWidth: 700,
+//   },
+// });
 function App() {
+  const classes = useStyles();
+  const [currency, setCurrency] = React.useState('EUR');
+
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
+  };
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+  
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const [showText, setShowText] = useState(false);
   const handleOnChange = () => {
     var chkds = document.getElementsByName("selfs")[0].checked;
   
-    if(chkds == true){
+    if(chkds === true){
+
       console.log(chkds);
       setShowText(true);
     }else {
       console.log("false");
       setShowText(false);
     }
-  
+ 
   };
   
   return (
@@ -93,16 +181,57 @@ function App() {
   <Tabs>
  
     
-    <div style={{paddingLeft:"2px",display:"flex", backgroundColor:"rgba(0, 0, 0, 0.04)", paddingLeft:"12px", paddingRight:"12px",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  justifyContent: "space-between",}} className="flex" >
+  <div style={{display:"flex", backgroundColor:"rgba(0, 0, 0, 0.04)",
+  paddingLeft:"12px", paddingRight:"12px", flexDirection: "row",
+  flexWrap: "wrap", justifyContent: "space-between",}} className="flex" >
      
     <input className="custominput" placeholder=" "  style={{alignSelf: "flex-start",focus:"none", border:"none",backgroundColor:"rgba(0, 0, 0, 0.0)",  paddingBottom:"12px",paddingTop:"12px",marginTop:"24px",marginBottom:"12px"}}></input>
     <div  style={{alignSelf: "flex-end",paddingBottom:"12px",paddingTop:"12px",marginTop:"12px",marginBottom:"12px"}}>
 
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+        
+        </DialogTitle>
+        <DialogContent >
+          <h3>Select Group</h3>
+          <p  style={{color: "gray"}}>You can create new group on move to a selecting item to an existing group.</p>
+       <div style={{borderBottom:"1px solid gray"}}></div>
+       <Box m={2} pt={3}>
+        <form  className={classes.root} noValidate autoComplete="off">
+      <div>
+        <TextField
+         style={{margintop:"12px"}}
+          id="standard-select-currency"
+          select
+          label="Select Group"
+          value={currency}
+          onChange={handleChange}
+          helperText=""
+          dividers
+        >
+          {currencies.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+    
+      </div>
+     
+    </form>
+    </Box>
+
+        <Button variant="contained" color="primary">
+      Move  to Group
+      </Button>
+        
+        </DialogContent>
+        <DialogActions>
+         
+        </DialogActions>
+      </Dialog>
     <label className="dropdown">
-    {showText ? <div> <div className="dd-button2"> Move to  Group </div>   <div className="dd-button5"> Delete </div> <div className="dd-button3"> Export </div> </div> : <div> <div className="dd-button2"> 2- 200 of 2,000 </div>   <div className="dd-button5"> Sort </div> <div className="dd-button3"> Filter </div> </div>}
+    {showText ? <div> <div className="dd-button2" onClick={handleClickOpen}> Move to  Group </div>   <div className="dd-button5"> Delete </div> <div className="dd-button3"> Export </div> </div> : <div> <div className="dd-button2"> 2- 200 of 2,000 </div>   <div className="dd-button5"> Sort </div> <div className="dd-button3"> Filter </div> </div>}
 
 
 
